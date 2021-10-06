@@ -6,15 +6,29 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const users = [{ id: 1, login: 'admin', password: 'admin', permission: 1 }];
+const users = [
+  {
+    id: 1,
+    email: 'admin@gmail.com',
+    username: 'admin',
+    password: 'admin',
+    permission: 1,
+  },
+];
 
 app.get('/users', (req, res) => {
   res.status(200).json(users);
 });
 
 app.post('/users', (req, res) => {
-  const { login, password } = req.body;
-  users.push({ id: users.length + 1, login, password, permission: 0 });
+  const { email, username, password } = req.body;
+  users.push({
+    id: users.length + 1,
+    email,
+    username,
+    password,
+    permission: 0,
+  });
   res.status(200).json(users);
 });
 
